@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carter Haney | Blogs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Courier New", monospace;
+      }
+
+      body {
+        background-color: #0a0a0a;
+        color: #00ff00;
+        line-height: 1.6;
+        padding: 2rem;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container {
+        max-width: 800px;
+        text-align: left;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 10px #00ff00;
+        text-align: center;
+      }
+
+      .blog-post {
+        border: 2px solid #00ff00;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border-radius: 5px;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Blogs</h1>
+        <div id="blogs-container"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        const blogs = [
+            'example.md'
+        ];
+
+        const container = document.getElementById('blogs-container');
+
+        blogs.forEach(blog => {
+            fetch(blog)
+                .then(response => response.text())
+                .then(text => {
+                    const post = document.createElement('div');
+                    post.classList.add('blog-post');
+                    post.innerHTML = marked(text);
+                    container.appendChild(post);
+                });
+        });
+    </script>
+</body>
+</html>
