@@ -52,21 +52,38 @@
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        const blogs = [
-            'example.md'
-        ];
+        const blogsContainer = document.getElementById('blogs-container');
+        const blogContentContainer = document.createElement('div');
+        blogContentContainer.id = 'blog-content-container';
+        
+        const blogList = document.createElement('ul');
+        blogList.id = 'blog-list';
 
-        const container = document.getElementById('blogs-container');
+        blogsContainer.appendChild(blogList);
+        blogsContainer.appendChild(blogContentContainer);
 
-        blogs.forEach(blog => {
-            fetch(blog)
-                .then(response => response.text())
-                .then(text => {
-                    const post = document.createElement('div');
-                    post.classList.add('blog-post');
-                    post.innerHTML = marked(text);
-                    container.appendChild(post);
-                });
+        // This would ideally be a dynamic list of files from the server.
+        // For now, we'll hardcode the list and sort it.
+        const blogFiles = [
+            '2025-06-27-example.md'
+            // Add more blog files here as they are created
+        ].sort().reverse();
+
+        blogFiles.forEach(blogFile => {
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = '#';
+            link.textContent = blogFile.replace('.md', '').replace(/\d{4}-\d{2}-\d{2}-/, '');
+            link.onclick = (e) => {
+                e.preventDefault();
+                fetch(blogFile)
+                    .then(response => response.text())
+                    .then(text => {
+                        blogContentContainer.innerHTML = marked(text);
+                    });
+            };
+            listItem.appendChild(link);
+            blogList.appendChild(listItem);
         });
     </script>
 </body>
