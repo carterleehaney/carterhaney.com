@@ -10,8 +10,6 @@ import NeonHeader from './components/NeonHeader';
 import Typewriter from './components/Typewriter';
 import RotatingTypewriter from './components/RotatingTypewriter';
 import Terminal from './components/Terminal.js';
-import Navbar from './components/Navbar.js';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
 
