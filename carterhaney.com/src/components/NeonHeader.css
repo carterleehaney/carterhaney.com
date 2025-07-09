@@ -1,0 +1,23 @@
+.NeonHeader {
+    font-family: 'Roboto Mono', monospace;
+    text-align: center;
+    color: #e5e7eb;
+    font-size: 2rem;
+    margin: 20px;
+    text-shadow: 0 0 10px #9ca3af;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #e5e7eb;
+  margin-left: 2px;
+  animation: blink 1s steps(1) infinite;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}

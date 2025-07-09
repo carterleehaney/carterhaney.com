@@ -1,16 +1,24 @@
-/* Styles for the Resume button */
-.resume-button {
+.Button {
   padding: 15px 15px;
-  font-size: 24px;
+  font-size: 20px;
   border-radius: 6px;
   background: transparent;
-  color: skyblue;
-  border: 1px solid skyblue;
+  color: #e5e7eb;
+  border: 2px solid #a9c1d9;
   cursor: pointer;
   display: flex;
   align-items: center;
+  font-family: 'Roboto Mono', monospace;
 }
 
-.resume-button svg {
-  margin-right: 5px;
+.Button svg {
+  margin-right: 10px;
+}
+
+.Button:hover {
+  background: #a9c1d9;
+  color: #1e293b;
+  border: 2px solid #a9c1d9;
+  box-shadow: 0 0 10px 5px #a9c1d9;
+  transition: all .3s ease;
 }

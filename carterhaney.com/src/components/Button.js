@@ -1,11 +1,20 @@
 import { FaDownload } from 'react-icons/fa';
 import './Button.css';
 
-function Button({ label, onClick }) {
+function Button({ icon, label, link, onClick }) {
+  const handleClick = () => {
+    if (link) {
+      window.location.href = link;
+    }
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <div>
-      <button onClick={onClick}>
-        Hello, World!
+      <button className="Button" onClick={handleClick}>
+        {icon}
         {label}
       </button>
     </div>
@@ -13,21 +22,3 @@ function Button({ label, onClick }) {
 }
 
 export default Button;
-
-function ResumeButton({ onClick }) {
-  return (
-    <div>
-      <button
-        className="resume-button"
-        onClick={() => {
-          window.location.href = "carterhaney.com/resume.pdf";
-        }}
-      >
-        <FaDownload />
-        Resume
-      </button>
-    </div>
-  );
-}
-
-export { ResumeButton };
