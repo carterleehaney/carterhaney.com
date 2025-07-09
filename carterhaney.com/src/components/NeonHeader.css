@@ -7,6 +7,12 @@
     text-shadow: 0 0 10px #9ca3af;
 }
 
+.NeonHeader-inline {
+  margin: 0;
+  font-size: 1em;
+  display: inline;
+}
+
 .typewriter-cursor {
   display: inline-block;
   width: 2px;
@@ -21,3 +27,4 @@
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
 }
+

@@ -8,6 +8,8 @@ import { FaGithub } from "react-icons/fa";
 import { FaDiscord } from "react-icons/fa";
 import NeonHeader from './components/NeonHeader';
 import Typewriter from './components/Typewriter';
+import RotatingTypewriter from './components/RotatingTypewriter';
+import Terminal from './components/Terminal.js';
 
 function App() {
 
@@ -27,11 +29,12 @@ function App() {
       { /* Header section */ }
       <header className="App-header">
 
+        {/* Default React Logo and instructions */}
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>Edit <code>src/App.js</code> and save to reload.</p>
+        {/* <p>Edit <code>src/App.js</code> and save to reload.</p> */}
 
         {/* Backend Message Test */}
-        <h1>{ message }</h1>
+        {/* <h1>{ message }</h1> */}
 
       </header>
 
@@ -42,8 +45,13 @@ function App() {
         <NeonHeader title="Carter Haney" />
 
         {/* Sub-header for skills (Make this a component...*/}
-        {/* <p>I do <strong><Typewriter text="Active Directory..." delay={100} infinite={true} /></strong></p> */}
-        
+        <p>
+          I'm working on {' '}
+          <span style={{ display: 'inline-block' }}>
+            <RotatingTypewriter delay={100} pause={1200} />
+          </span>
+        </p>
+
         {/* Div wrapper for buttons */}
         <div className='button-container' style={{display: 'flex'}}>
         <Button
@@ -67,7 +75,16 @@ function App() {
           link="https://discord.com/users/divinelumina"
         />
         </div>
-        </main>
+
+        {/* Terminal component */}
+        <div style={{ margin: '2rem 0', display: 'flex', justifyContent: 'center' }}>
+          <Terminal />
+        </div>
+
+      </main>
+
+      { /* Footer section */ }
+      <footer></footer>
 
     </div>
   );
