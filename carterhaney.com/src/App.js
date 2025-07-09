@@ -10,6 +10,7 @@ import NeonHeader from './components/NeonHeader';
 import Typewriter from './components/Typewriter';
 import RotatingTypewriter from './components/RotatingTypewriter';
 import Terminal from './components/Terminal.js';
+import TopNav from './components/TopNav.js';
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-
+      <TopNav />
       { /* Header section */ }
       <header className="App-header">
 
