@@ -1,0 +1,16 @@
+/* Styles for the Resume button */
+.resume-button {
+  padding: 15px 15px;
+  font-size: 24px;
+  border-radius: 6px;
+  background: transparent;
+  color: skyblue;
+  border: 1px solid skyblue;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.resume-button svg {
+  margin-right: 5px;
+}
