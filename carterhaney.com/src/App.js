@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login.js';
 import Blogs from './pages/Blogs.js';
 import Home from './pages/Home.js';
+import Admin from './pages/Admin.js';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   );

@@ -23,6 +23,7 @@ const Login = () => {
             const data = await res.json();
             if (res.ok) {
                 setStatusMessage('Login successful!');
+                localStorage.setItem('token', data.token);
             } else {
                 setStatusMessage(data.message || 'Login failed!');
             }
@@ -54,7 +55,7 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem'}}>
                     <Button type="submit" label="Login" />
                 </div>
             </form>

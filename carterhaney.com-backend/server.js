@@ -48,6 +48,20 @@ app.post("/api/login", async (req, res) => {
     }
 });
 
+app.post("/api/verify", (req, res) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.json({ valid: false });
+    }
+    const token = authHeader.split(' ')[1];
+    try {
+        jwt.verify(token, process.env.JWT_SECRET);
+        res.json({ valid: true });
+    } catch (err) {
+        res.json({ valid: false });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });

@@ -14,12 +14,14 @@ const Home = () => {
 
       {/* Header section */}
       <header className="App-header">
+
         {/* Default React Logo and instructions */}
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         {/* <p>Edit <code>src/App.js</code> and save to reload.</p> */}
 
         {/* Backend Message Test */}
         {/* <h1>{ message }</h1> */}
+        
       </header>
 
       {/* Main section */}
@@ -35,31 +37,32 @@ const Home = () => {
           </span>
         </p>
 
-        {/* Div wrapper for buttons */}
-        <div className='button-container' style={{ display: 'flex' }}>
-          <Button
-            icon={<FaDownload />}
-            label="Resume"
-            link="carterhaney.com/resume.pdf"
-          />
-          <Button
-            icon={<FaLinkedin />}
-            label="LinkedIn"
-            link="https://www.linkedin.com/in/carterhaney"
-          />
-          <Button
-            icon={<FaGithub />}
-            label="GitHub"
-            link="https://github.com/carterleehaney"
-          />
-          <Button
-            icon={<FaDiscord />}
-            label="Discord"
-            link="https://discord.com/users/divinelumina"
-          />
-        </div>
+          { /* Div wrapper for buttons */}
+          <div className='button-container' style={{ display: 'flex' }}>
+            <Button
+              icon={<FaDownload />}
+              label="Resume"
+              link="/resume.pdf"
+              download="CarterHaney_Resume.pdf"
+            />
+            <Button
+              icon={<FaLinkedin />}
+              label="LinkedIn"
+              link="https://www.linkedin.com/in/carterhaney"
+            />
+            <Button
+              icon={<FaGithub />}
+              label="GitHub"
+              link="https://github.com/carterleehaney"
+            />
+            <Button
+              icon={<FaDiscord />}
+              label="Discord"
+              link="https://discord.com/users/divinelumina"
+            />
+          </div>
 
-        {/* Terminal component */}
+          {/* Terminal component */}
         <div style={{ margin: '2rem 0', display: 'flex', justifyContent: 'center' }}>
           <Terminal />
         </div>
