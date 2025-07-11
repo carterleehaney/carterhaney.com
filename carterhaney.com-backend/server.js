@@ -8,24 +8,31 @@ require('dotenv').config({ path: '.env' });
 const app = express();
 const port = 5000;
 
+// Middleware
 app.use(cors({
-    origin: 'http://localhost:3000',
+    // Allow requests from anywhere, change in production :)
+    // But also I'm using apache2 as a reverse proxy, so this might not be necessary, not sure yet
+    origin: true,
     credentials: true
 }));
 app.use(express.json());
 
+// PostgreSQL Connection Pool
+// These are now in .env instead of being hardcoded :skull:
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'website-test',
-    password: 'postgres',
-    port: 5432,
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT,
 });
 
+// Test Route
 app.get("/api/message", (req, res) => {
     res.json({ message: "Hello from the backend!"});
 });
 
+// Login Route
 app.post("/api/login", async (req, res) => {
     const { username, password } = req.body;
 
@@ -36,7 +43,7 @@ app.post("/api/login", async (req, res) => {
             return res.status(401).json({ message: "Invalid username or password." });
         }
 
-        const isValid = await bcrypt.compare(password, user.rows[0].passwordHash);
+        const isValid = await bcrypt.compare(password, user.rows[0].passwordhash);
         if (!isValid) {
             return res.status(401).json({ message: "Invalid username or password." });
         }
@@ -44,10 +51,12 @@ app.post("/api/login", async (req, res) => {
         const token = jwt.sign({ id: user.rows[0].id }, process.env.JWT_SECRET, { expiresIn: "1h" });
         res.json({ token });
     } catch (error) {
+        console.error("Login error:", error);
         res.status(500).json({ message: "Internal server error." });
     }
 });
 
+// Verify Route
 app.post("/api/verify", (req, res) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -62,6 +71,7 @@ app.post("/api/verify", (req, res) => {
     }
 });
 
+// Start the Server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
