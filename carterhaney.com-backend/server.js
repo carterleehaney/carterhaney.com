@@ -3,8 +3,7 @@ const cors = require("cors");
 const bcrypt = require('bcrypt');
 const { Pool } = require('pg');
 const jwt = require('jsonwebtoken');
-
-process.env.JWT_SECRET = process.env.JWT_SECRET || 'test_secret_:)';
+require('dotenv').config({ path: '.env' });
 
 const app = express();
 const port = 5000;
