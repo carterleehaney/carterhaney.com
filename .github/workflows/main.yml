@@ -1,0 +1,43 @@
+name: Deploy to carterhaney.com
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy to server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.MAIN_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          
+          ssh-keyscan carterhaney.com >> ~/.ssh/known_hosts
+          
+          ssh -i ~/.ssh/deploy_key carterleehaney@carterhaney.com << 'ENDSSH'
+            set -e
+            
+            DEPLOY_DIR=$(mktemp -d)
+            cd $DEPLOY_DIR
+            
+            git clone https://github.com/carterleehaney/carterhaney.com.git .
+            
+            npm ci
+            npm run build
+            
+            sudo rm -rf /var/www/html/*
+            sudo mv build/* /var/www/html/
+            
+            # Clean up
+            cd ~
+            rm -rf $DEPLOY_DIR
+            
+            echo "Deployment completed successfully!"
+          ENDSSH
