@@ -15,23 +15,30 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.MAIN_KEY }}
         run: |
+          # Set up SSH key
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           
+          # Add server to known hosts
           ssh-keyscan carterhaney.com >> ~/.ssh/known_hosts
           
+          # SSH into server and deploy
           ssh -i ~/.ssh/deploy_key carterleehaney@carterhaney.com << 'ENDSSH'
             set -e
             
+            # Create temporary directory for deployment
             DEPLOY_DIR=$(mktemp -d)
             cd $DEPLOY_DIR
             
+            # Clone the repository
             git clone https://github.com/carterleehaney/carterhaney.com.git .
             
-            npm ci
+            # Install dependencies and build
+            npm install
             npm run build
             
+            # Move build to web root (requires sudo if needed)
             sudo rm -rf /var/www/html/*
             sudo mv build/* /var/www/html/
             
