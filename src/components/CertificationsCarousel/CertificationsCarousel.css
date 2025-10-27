@@ -31,6 +31,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	overflow: hidden;
 }
 
 .carousel-cards {
@@ -44,33 +45,33 @@
 
 .carousel-card-wrapper {
 	position: absolute;
-	transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-	            opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-	            left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-	            right 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
 	width: 350px;
-	will-change: transform, opacity;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	perspective: 1000px;
+	-webkit-perspective: 1000px;
 }
 
 /* Positioning based on state */
 .carousel-card-wrapper.left {
-	left: 0;
-	opacity: 0.9;
-	transform: scale(0.85) translateX(0);
+	left: -50px;
+	opacity: 0.6;
+	transform: scale(0.85) translateZ(-50px);
 	z-index: 1;
 }
 
 .carousel-card-wrapper.center {
 	left: 50%;
-	transform: translateX(-50%) scale(1);
+	transform: translateX(-50%) scale(1) translateZ(0);
 	opacity: 1;
 	z-index: 3;
 }
 
 .carousel-card-wrapper.right {
-	right: 0;
+	right: -50px;
 	opacity: 0.6;
-	transform: scale(0.85) translateX(0);
+	transform: scale(0.85) translateZ(-50px);
 	z-index: 1;
 }
 
@@ -80,18 +81,28 @@
 	z-index: 0;
 }
 
+.carousel-card-wrapper.hidden.from-left {
+	left: -400px;
+	transform: scale(0.7) translateZ(-100px);
+}
+
+.carousel-card-wrapper.hidden.from-right {
+	right: -400px;
+	transform: scale(0.7) translateZ(-100px);
+}
+
 .certification-card {
 	background: rgba(20, 20, 20, 0.95);
 	border: 1px solid rgba(255, 255, 255, 0.15);
 	border-radius: 12px;
 	overflow: hidden;
-	transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-	            box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-	            border-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
 	width: 100%;
 	transform: translateZ(0);
 	-webkit-transform: translateZ(0);
 	position: relative;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
 }
 
 .carousel-card-wrapper.center .certification-card {

@@ -3,6 +3,7 @@ import './CertificationsCarousel.css';
 
 export default function CertificationsCarousel() {
 	const [currentIndex, setCurrentIndex] = useState(0);
+	const [direction, setDirection] = useState('right');
 
 	const certifications = [
 		{
@@ -32,24 +33,39 @@ export default function CertificationsCarousel() {
 	];
 
 	const nextSlide = () => {
-		setCurrentIndex((prev) => (prev + 1) % certifications.length);
-	};
-
-	const prevSlide = () => {
+		setDirection('left');
 		setCurrentIndex((prev) => 
 			prev === 0 ? certifications.length - 1 : prev - 1
 		);
 	};
 
+	const prevSlide = () => {
+		setDirection('right');
+		setCurrentIndex((prev) => (prev + 1) % certifications.length);
+	};
+
 	const goToSlide = (index) => {
+		setDirection(index > currentIndex ? 'right' : 'left');
 		setCurrentIndex(index);
 	};
 
 	const getPosition = (index) => {
 		if (index === currentIndex) return 'center';
-		if (index === (currentIndex - 1 + certifications.length) % certifications.length) return 'left';
-		if (index === (currentIndex + 1) % certifications.length) return 'right';
-		return 'hidden';
+		
+		const leftIndex = (currentIndex - 1 + certifications.length) % certifications.length;
+		const rightIndex = (currentIndex + 1) % certifications.length;
+		
+		if (index === leftIndex) return 'left';
+		if (index === rightIndex) return 'right';
+		
+		// Determine if hidden card should be positioned far left or far right
+		if (direction === 'right') {
+			// Cards entering from right, exiting to left
+			return 'hidden from-left';
+		} else {
+			// Cards entering from left, exiting to right
+			return 'hidden from-right';
+		}
 	};
 
 	return (
